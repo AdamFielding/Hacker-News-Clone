@@ -13,9 +13,7 @@ export const App: React.SFC<IHelloProps> = ({
 }): JSX.Element => (
   <>
     <Title title="Hacker News Clone" />
-    <h1>
-      Here's the app, using {compiler} and {framework}.
-    </h1>
+    <h2>Stories</h2>
     <Stories />
   </>
 );

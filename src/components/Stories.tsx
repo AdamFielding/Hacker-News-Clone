@@ -5,8 +5,12 @@ export class Stories extends React.Component {
   public state: IState = {};
 
   public async componentDidMount() {
-    const test = await getTopStory();
-    this.setState({ story: test });
+    try {
+      const test = await getTopStory();
+      this.setState({ story: test });
+    } catch {
+      this.setState({ error: "failed to load content" });
+    }
   }
 
   public render(): JSX.Element {
@@ -17,12 +21,15 @@ export class Stories extends React.Component {
           <a href={this.state.story.url}>{this.state.story.title}</a>
         </p>
       );
+    } else if (this.state.error) {
+      return <p>{this.state.error}</p>;
     } else {
-      return <h1>Loading</h1>;
+      return <p>Loading</p>;
     }
   }
 }
 
 interface IState {
   story?: IStory;
+  error?: string;
 }
