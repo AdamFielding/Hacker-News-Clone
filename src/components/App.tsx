@@ -1,4 +1,5 @@
 import * as React from "react";
+import { Stories } from "./Stories";
 import { Title } from "./Title";
 
 export interface IHelloProps {
@@ -15,5 +16,6 @@ export const App: React.SFC<IHelloProps> = ({
     <h1>
       Here's the app, using {compiler} and {framework}.
     </h1>
+    <Stories />
   </>
 );
