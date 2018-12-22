@@ -13,7 +13,8 @@ export class Stories extends React.Component {
     if (this.state.story) {
       return (
         <p>
-          title: <a href={this.state.story.url}>{this.state.story.title}</a>
+          <span>{this.state.story.score}: </span>
+          <a href={this.state.story.url}>{this.state.story.title}</a>
         </p>
       );
     } else {
