@@ -27,9 +27,7 @@ export const getStories = async (
       return story;
     })
   );
-  console.log(stories);
   return stories;
-  // await getStory;
 };
 
 export interface IStory {
@@ -41,5 +39,6 @@ export interface IStory {
   time: number;
   title: string;
   type: string;
-  url: string;
+  url?: string;
+  text?: string;
 }

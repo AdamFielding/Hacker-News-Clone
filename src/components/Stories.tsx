@@ -2,12 +2,16 @@ import * as React from "react";
 import { getStories, getTopStory, IStory } from "../api";
 import { Story } from "./Story";
 
-export class Stories extends React.Component {
-  public state: IState = {};
+export class Stories extends React.PureComponent {
+  public readonly state: IState = {
+    numberOfStories: 10
+  };
 
   public async componentDidMount() {
     try {
-      this.setState({ storiesData: await getStories(10) });
+      this.setState({
+        storiesData: await getStories(this.state.numberOfStories)
+      });
     } catch {
       this.setState({ error: "failed to load content" });
     }
@@ -25,11 +29,12 @@ export class Stories extends React.Component {
   }
 
   private stories(storiesData: IStory[]) {
-    return storiesData.map(story => Story(story));
+    return storiesData.map(storyData => Story(storyData));
   }
 }
 
 interface IState {
   storiesData?: IStory[];
+  numberOfStories: number;
   error?: string;
 }
