@@ -16,6 +16,22 @@ const getStory = async (id: string): Promise<IStory> => {
   return storyResponse.json();
 };
 
+export const getStories = async (
+  numberOfStories: number
+): Promise<IStory[]> => {
+  const allIds: string[] = await getTopStoryIds();
+  const ids = allIds.slice(0, numberOfStories);
+  const stories: IStory[] = await Promise.all(
+    ids.map(async id => {
+      const story = await getStory(id);
+      return story;
+    })
+  );
+  console.log(stories);
+  return stories;
+  // await getStory;
+};
+
 export interface IStory {
   by: "string";
   descendants: number;

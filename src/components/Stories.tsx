@@ -1,35 +1,35 @@
 import * as React from "react";
-import { getTopStory, IStory } from "../api";
+import { getStories, getTopStory, IStory } from "../api";
+import { Story } from "./Story";
 
 export class Stories extends React.Component {
   public state: IState = {};
 
   public async componentDidMount() {
     try {
-      const test = await getTopStory();
-      this.setState({ story: test });
+      this.setState({ storiesData: await getStories(10) });
     } catch {
       this.setState({ error: "failed to load content" });
     }
   }
 
-  public render(): JSX.Element {
-    if (this.state.story) {
-      return (
-        <p>
-          <span>{this.state.story.score}: </span>
-          <a href={this.state.story.url}>{this.state.story.title}</a>
-        </p>
-      );
-    } else if (this.state.error) {
-      return <p>{this.state.error}</p>;
+  public render() {
+    const { storiesData, error } = this.state;
+    if (storiesData) {
+      return this.stories(storiesData);
+    } else if (error) {
+      return <p>{error}</p>;
     } else {
       return <p>Loading</p>;
     }
   }
+
+  private stories(storiesData: IStory[]) {
+    return storiesData.map(story => Story(story));
+  }
 }
 
 interface IState {
-  story?: IStory;
+  storiesData?: IStory[];
   error?: string;
 }
