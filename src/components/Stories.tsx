@@ -8,14 +8,14 @@ import {
   Loader,
   Placeholder
 } from "semantic-ui-react";
-import { getStories, IStory } from "../api";
+import { getStories, IStory } from "../storyService";
 import { StoryCard } from "./StoryCard";
 import { StoryListItem } from "./StoryListItem";
 
 export class Stories extends React.PureComponent {
   public readonly state: IState = {
     numberOfStories: 10,
-    view: View.grid
+    view: View.list
   };
 
   public async componentDidMount() {
@@ -23,8 +23,8 @@ export class Stories extends React.PureComponent {
       this.setState({
         storiesData: await getStories(this.state.numberOfStories)
       });
-    } catch {
-      this.setState({ error: "failed to load content" });
+    } catch (error) {
+      this.setState({ error });
     }
   }
 
@@ -51,7 +51,7 @@ export class Stories extends React.PureComponent {
         {storiesData && view === View.grid && (
           <Card.Group centered={true}>{this.storyGrid(storiesData)}</Card.Group>
         )}
-        {!storiesData && (
+        {!storiesData && !error && (
           <Placeholder fluid={true}>
             <Placeholder.Paragraph>
               <Loader active={true}>Loading</Loader>

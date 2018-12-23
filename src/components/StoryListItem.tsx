@@ -1,23 +1,24 @@
 import * as React from "react";
 import { List } from "semantic-ui-react";
 import { getHackerNewsUrl } from "../api";
+import { IStory } from "../storyService";
 
-interface IStoryProps {
-  id: number;
-  title: string;
-  score: number;
-  url?: string;
-  text?: string;
-}
-
-export const StoryListItem: React.SFC<IStoryProps> = (props): JSX.Element => {
-  const { id, title, url, score, text } = props;
+export const StoryListItem: React.SFC<IStory> = (props): JSX.Element => {
+  const { id, title, url, score, text, domain } = props;
   return (
     <List.Item key={id}>
       <List.Content>
-        <List.Header as={"a"} href={url || getHackerNewsUrl(id)}>
+        <List.Header
+          color="grey"
+          size="small"
+          as={"a"}
+          href={url || getHackerNewsUrl(id)}
+        >
           {title}
         </List.Header>
+        <List.Description as={"a"} href={url}>
+          {domain}
+        </List.Description>
         <List.Description>
           Score: {score}
           <br />

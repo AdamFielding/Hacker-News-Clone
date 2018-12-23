@@ -16,6 +16,7 @@ export const StoryCard: React.SFC<IStoryProps> = (props): JSX.Element => {
     <Card>
       <Card.Content header={title} />
       <Card.Content description={text} />
+      <Card.Content description={text} />
     </Card>
 
     // <List.Item key={id}>
