@@ -8,7 +8,4 @@ import { App } from "./components/App";
 
 // const store = configureStore();
 
-render(
-  <App compiler="TypeScript" framework="React" />,
-  document.getElementById("App")
-);
+render(<App />, document.getElementById("App"));

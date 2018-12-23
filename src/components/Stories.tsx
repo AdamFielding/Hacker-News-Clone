@@ -9,14 +9,17 @@ import {
   Placeholder
 } from "semantic-ui-react";
 import { getStories, IStory } from "../storyService";
+import { View } from "./App";
 import { StoryCard } from "./StoryCard";
 import { StoryListItem } from "./StoryListItem";
 
-export class Stories extends React.PureComponent {
+export class Stories extends React.PureComponent<IProps> {
   public readonly state: IState = {
-    numberOfStories: 10,
-    view: View.list
+    numberOfStories: 10
   };
+  public constructor(props: IProps) {
+    super(props);
+  }
 
   public async componentDidMount() {
     try {
@@ -29,7 +32,8 @@ export class Stories extends React.PureComponent {
   }
 
   public render() {
-    const { storiesData, error, view } = this.state;
+    const { view } = this.props;
+    const { storiesData, error } = this.state;
     return (
       <Container text={view === View.list}>
         <Header
@@ -83,10 +87,8 @@ interface IState {
   storiesData?: IStory[];
   numberOfStories: number;
   error?: string;
-  view: View;
 }
 
-enum View {
-  list,
-  grid
+interface IProps {
+  view: View;
 }

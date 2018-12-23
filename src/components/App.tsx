@@ -2,18 +2,33 @@ import * as React from "react";
 import { Container, Header } from "semantic-ui-react";
 import { Stories } from "./Stories";
 import { Title } from "./Title";
+import ViewSwitchButton from "./ViewSwitchButton";
 
-export interface IHelloProps {
-  compiler: string;
-  framework: string;
+export interface IState {
+  view: View;
 }
 
-export const App: React.SFC<IHelloProps> = ({
-  compiler,
-  framework
-}): JSX.Element => (
-  <Container style={{ marginTop: "3em", marginBottom: "3em" }}>
-    <Title title="Hacker News Clone" />
-    <Stories />
-  </Container>
-);
+export class App extends React.PureComponent {
+  public readonly state: IState = {
+    view: View.list
+  };
+
+  public render() {
+    return (
+      <Container style={{ marginTop: "3em", marginBottom: "3em" }}>
+        <Title title="Hacker News Clone" />
+        <ViewSwitchButton view={this.state.view} onClick={this.handleClick} />
+        <Stories view={this.state.view} />
+      </Container>
+    );
+  }
+
+  private handleClick = (view: View) => {
+    this.setState({ view });
+  };
+}
+
+export const enum View {
+  list,
+  grid
+}
