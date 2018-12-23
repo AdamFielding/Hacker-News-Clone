@@ -1,5 +1,6 @@
 import * as React from "react";
-import { Header } from "semantic-ui-react";
+import { Container, Divider, Header } from "semantic-ui-react";
+import { baseHackerNewsUrl } from "../api";
 
 interface ITitleProps {
   title: string;
@@ -8,7 +9,16 @@ interface ITitleProps {
 export const Title: React.FunctionComponent<ITitleProps> = (
   props
 ): JSX.Element => (
-  <Header as="h1" dividing={true}>
-    {props.title}
-  </Header>
+  <>
+    <Container text={true}>
+      <Header as="h1" color="orange">
+        {props.title}
+        <Header.Subheader>
+          A worse version of your favourite website{" "}
+          <a href={baseHackerNewsUrl}>(Let me fix that for you)</a>.
+        </Header.Subheader>
+      </Header>
+    </Container>
+    <Divider />
+  </>
 );

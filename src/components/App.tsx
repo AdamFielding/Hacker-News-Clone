@@ -12,9 +12,8 @@ export const App: React.SFC<IHelloProps> = ({
   compiler,
   framework
 }): JSX.Element => (
-  <Container style={{ marginTop: "3em" }}>
+  <Container style={{ marginTop: "3em", marginBottom: "3em" }}>
     <Title title="Hacker News Clone" />
-    <Header as="h2">Stories</Header>
     <Stories />
   </Container>
 );
