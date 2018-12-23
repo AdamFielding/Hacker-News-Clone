@@ -1,4 +1,5 @@
 import * as React from "react";
+import { Header } from "semantic-ui-react";
 
 interface ITitleProps {
   title: string;
@@ -6,4 +7,8 @@ interface ITitleProps {
 
 export const Title: React.FunctionComponent<ITitleProps> = (
   props
-): JSX.Element => <h1>{props.title}</h1>;
+): JSX.Element => (
+  <Header as="h1" dividing={true}>
+    {props.title}
+  </Header>
+);

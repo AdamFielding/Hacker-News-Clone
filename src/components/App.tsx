@@ -1,4 +1,5 @@
 import * as React from "react";
+import { Container, Header } from "semantic-ui-react";
 import { Stories } from "./Stories";
 import { Title } from "./Title";
 
@@ -11,9 +12,9 @@ export const App: React.SFC<IHelloProps> = ({
   compiler,
   framework
 }): JSX.Element => (
-  <>
+  <Container style={{ marginTop: "3em" }}>
     <Title title="Hacker News Clone" />
-    <h2>Stories</h2>
+    <Header as="h2">Stories</Header>
     <Stories />
-  </>
+  </Container>
 );

@@ -1,5 +1,6 @@
 import * as React from "react";
-import { getStories, getTopStory, IStory } from "../api";
+import { Dimmer, List, Loader } from "semantic-ui-react";
+import { getStories, IStory } from "../api";
 import { Story } from "./Story";
 
 export class Stories extends React.PureComponent {
@@ -20,11 +21,23 @@ export class Stories extends React.PureComponent {
   public render() {
     const { storiesData, error } = this.state;
     if (storiesData) {
-      return this.stories(storiesData);
+      return (
+        <List
+          animated={true}
+          divided={true}
+          relaxed="very"
+          ordered={true}
+          items={this.stories(storiesData)}
+        />
+      );
     } else if (error) {
       return <p>{error}</p>;
     } else {
-      return <p>Loading</p>;
+      return (
+        <Dimmer active={true}>
+          <Loader />
+        </Dimmer>
+      );
     }
   }
 
