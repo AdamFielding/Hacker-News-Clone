@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Card } from "semantic-ui-react";
-import { getHackerNewsUrl } from "../api";
+import { getHackerNewsUrl } from "../common/api";
 
 interface IStoryProps {
   id: number;

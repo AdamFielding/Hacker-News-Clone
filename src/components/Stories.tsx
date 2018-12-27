@@ -9,7 +9,7 @@ import {
   Loader,
   Placeholder
 } from "semantic-ui-react";
-import { getStories, IStory } from "../storyService";
+import { getStories, IStory } from "../common/storyService";
 import { View } from "./App";
 import { StoryCard } from "./StoryCard";
 import { StoryListItem } from "./StoryListItem";

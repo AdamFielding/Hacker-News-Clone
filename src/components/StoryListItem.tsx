@@ -1,7 +1,7 @@
 import * as React from "react";
 import { List } from "semantic-ui-react";
-import { getHackerNewsUrl } from "../api";
-import { IStory } from "../storyService";
+import { getHackerNewsUrl } from "../common/api";
+import { IStory } from "../common/storyService";
 
 export const StoryListItem: React.SFC<IStory> = (props): JSX.Element => {
   const { id, title, url, score, text, domain } = props;

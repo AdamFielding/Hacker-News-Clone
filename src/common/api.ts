@@ -5,8 +5,13 @@ export function getHackerNewsUrl(id: number): string {
   return `${baseHackerNewsUrl}item?id=${id}`;
 }
 
-export const getDomainFromUrl = (urlString: string): string =>
-  new URL(urlString).hostname || "";
+export const getDomainFromUrl = (urlString: string): string => {
+  try {
+    return new URL(urlString).hostname || "";
+  } catch {
+    return "";
+  }
+};
 
 export const getTopStoryIds = async (): Promise<number[]> => {
   const response = await fetch(`${baseApiUrl}topstories.json`);

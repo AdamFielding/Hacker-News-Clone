@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Container, Divider, Header } from "semantic-ui-react";
-import { baseHackerNewsUrl } from "../api";
+import { baseHackerNewsUrl } from "../common/api";
 
 interface ITitleProps {
   title: string;
