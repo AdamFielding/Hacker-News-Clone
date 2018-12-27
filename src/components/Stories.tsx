@@ -1,5 +1,6 @@
 import * as React from "react";
 import {
+  Button,
   Card,
   Container,
   Grid,
@@ -22,13 +23,7 @@ export class Stories extends React.PureComponent<IProps> {
   }
 
   public async componentDidMount() {
-    try {
-      this.setState({
-        storiesData: await getStories(this.state.numberOfStories)
-      });
-    } catch (error) {
-      this.setState({ error });
-    }
+    this.refreshStories();
   }
 
   public render() {
@@ -40,9 +35,9 @@ export class Stories extends React.PureComponent<IProps> {
           as="h2"
           color="grey"
           textAlign={view === View.grid ? "center" : "left"}
-        >
-          Stories
-        </Header>
+          content="Stories"
+          subheader={<Button onClick={this.refreshStories} content="refresh" />}
+        />
         {storiesData && view === View.list && (
           <List
             animated={true}
@@ -67,6 +62,16 @@ export class Stories extends React.PureComponent<IProps> {
       </Container>
     );
   }
+
+  private refreshStories = async (): Promise<void> => {
+    try {
+      this.setState({
+        storiesData: await getStories(this.state.numberOfStories)
+      });
+    } catch (error) {
+      this.setState({ error });
+    }
+  };
 
   private storyList(storiesData: IStory[]) {
     return storiesData.map(storyData => StoryListItem(storyData));

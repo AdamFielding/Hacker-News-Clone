@@ -17,13 +17,16 @@ export class App extends React.PureComponent {
     return (
       <Container style={{ marginTop: "3em", marginBottom: "3em" }}>
         <Title title="Hacker News Clone" />
-        <ViewSwitchButton view={this.state.view} onClick={this.handleClick} />
+        <ViewSwitchButton
+          view={this.state.view}
+          onClick={this.toggleStoryView}
+        />
         <Stories view={this.state.view} />
       </Container>
     );
   }
 
-  private handleClick = (view: View) => {
+  private toggleStoryView = (view: View) => {
     this.setState({ view });
   };
 }

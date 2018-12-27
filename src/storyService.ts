@@ -9,7 +9,7 @@ export const getStories = async (
   numberOfStories: number
 ): Promise<IStory[]> => {
   try {
-    const allIds: string[] = await getTopStoryIds();
+    const allIds: number[] = await getTopStoryIds();
     const ids = allIds.slice(0, numberOfStories);
     const stories: IStory[] = await Promise.all(
       ids.map(async id => {
