@@ -12,4 +12,11 @@ describe("getDomainFromUrl", () => {
   it("should return an empty string if the url is not valid", () => {
     expect(api.getDomainFromUrl("This for sure is not a url")).toBe("");
   });
+  it("should return an empty string if the input is not a string", () => {
+    expect(api.getDomainFromUrl(undefined)).toBe("");
+    expect(api.getDomainFromUrl(null)).toBe("");
+    expect(api.getDomainFromUrl(10)).toBe("");
+    expect(api.getDomainFromUrl({ test: "test" })).toBe("");
+    expect(api.getDomainFromUrl([])).toBe("");
+  });
 });

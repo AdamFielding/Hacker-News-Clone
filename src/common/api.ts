@@ -5,14 +5,6 @@ export function getHackerNewsUrl(id: number): string {
   return `${baseHackerNewsUrl}item?id=${id}`;
 }
 
-export const getDomainFromUrl = (urlString: string): string => {
-  try {
-    return new URL(urlString).hostname || "";
-  } catch {
-    return "";
-  }
-};
-
 export const getTopStoryIds = async (): Promise<number[]> => {
   const response = await fetch(`${baseApiUrl}topstories.json`);
   const json = await response.json();
@@ -23,6 +15,13 @@ export const getStory = async (id: number): Promise<IStoryResponse> => {
   return getCachedStory(id) || fetchStory(id);
 };
 
+export const getDomainFromUrl = (urlString: any): string => {
+  try {
+    return new URL(urlString).hostname;
+  } catch {
+    return "";
+  }
+};
 export interface IStoryResponse {
   by: "string";
   descendants: number;
