@@ -1,8 +1,10 @@
 const path = require("path");
-const HtmlWebpackPlugin = require("html-webpack-plugin");
-const CleanWebpackPlugin = require("clean-webpack-plugin");
+import { Configuration } from "webpack";
+import "webpack-dev-server";
+import HtmlWebpackPlugin from "html-webpack-plugin";
+import { CleanWebpackPlugin } from "clean-webpack-plugin";
 
-module.exports = {
+const config: Configuration = {
   mode: "development",
   entry: "./src/index.tsx",
   output: {
@@ -10,7 +12,7 @@ module.exports = {
     path: path.resolve(__dirname, "dist")
   },
   plugins: [
-    new CleanWebpackPlugin(["dist"]),
+    new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
       template: "src/index.html"
     })
@@ -33,13 +35,6 @@ module.exports = {
       { enforce: "pre", test: /\.js$/, loader: "source-map-loader" }
     ]
   }
-
-  // When importing a module whose path matches one of the following, just
-  // assume a corresponding global variable exists and use that instead.
-  // This is important because it allows us to avoid bundling all of our
-  // dependencies, which allows browsers to cache those libraries between builds.
-  //   externals: {
-  //     react: "React",
-  //     "react-dom": "ReactDOM"
-  //   }
 };
+
+export default config;
