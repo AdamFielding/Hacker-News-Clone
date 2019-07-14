@@ -2,18 +2,16 @@ import {
   getDomainFromUrl,
   getStory,
   getTopStoryIds,
-  IStoryResponse
+  StoryResponse
 } from "./api";
 
-export const getStories = async (
-  numberOfStories: number
-): Promise<IStory[]> => {
+export const getStories = async (numberOfStories: number): Promise<Story[]> => {
   try {
     const allIds: number[] = await getTopStoryIds();
     const ids = allIds.slice(0, numberOfStories);
-    const stories: IStory[] = await Promise.all(
+    const stories: Story[] = await Promise.all(
       ids.map(async id => {
-        const storyData: IStoryResponse = await getStory(id);
+        const storyData: StoryResponse = await getStory(id);
         if (storyData.url) {
           return {
             ...storyData,
@@ -30,6 +28,6 @@ export const getStories = async (
   }
 };
 
-export interface IStory extends IStoryResponse {
+export interface Story extends StoryResponse {
   domain?: string;
 }

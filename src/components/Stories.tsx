@@ -9,20 +9,20 @@ import {
   Loader,
   Placeholder
 } from "semantic-ui-react";
-import { getStories, IStory } from "../common/storyService";
+import { getStories, Story } from "../common/storyService";
 import { View } from "./App";
 import { StoryCard } from "./StoryCard";
 import { StoryListItem } from "./StoryListItem";
 
-export class Stories extends React.PureComponent<IProps> {
-  public readonly state: IState = {
+export class Stories extends React.PureComponent<Props> {
+  public readonly state: State = {
     numberOfStories: 10
   };
-  public constructor(props: IProps) {
+  public constructor(props: Props) {
     super(props);
   }
 
-  public async componentDidMount() {
+  public async componentDidMount(): Promise<void> {
     this.refreshStories();
   }
 
@@ -73,11 +73,11 @@ export class Stories extends React.PureComponent<IProps> {
     }
   };
 
-  private storyList(storiesData: IStory[]) {
+  private storyList(storiesData: Story[]) {
     return storiesData.map(storyData => StoryListItem(storyData));
   }
 
-  private storyGrid(storiesData: IStory[]) {
+  private storyGrid(storiesData: Story[]) {
     return storiesData.map(storyData => StoryCard(storyData));
   }
 
@@ -88,12 +88,12 @@ export class Stories extends React.PureComponent<IProps> {
   }
 }
 
-interface IState {
-  storiesData?: IStory[];
+interface State {
+  storiesData?: Story[];
   numberOfStories: number;
   error?: string;
 }
 
-interface IProps {
+interface Props {
   view: View;
 }

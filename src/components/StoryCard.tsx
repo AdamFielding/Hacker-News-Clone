@@ -2,7 +2,7 @@ import * as React from "react";
 import { Card } from "semantic-ui-react";
 import { getHackerNewsUrl } from "../common/api";
 
-interface IStoryProps {
+interface StoryProps {
   id: number;
   title: string;
   score: number;
@@ -10,7 +10,7 @@ interface IStoryProps {
   text?: string;
 }
 
-export const StoryCard: React.SFC<IStoryProps> = (props): JSX.Element => {
+export const StoryCard: React.SFC<StoryProps> = (props): JSX.Element => {
   const { id, title, url, score, text } = props;
   return (
     <Card>

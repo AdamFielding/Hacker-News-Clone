@@ -4,12 +4,17 @@ import { Stories } from "./Stories";
 import { Title } from "./Title";
 import ViewSwitchButton from "./ViewSwitchButton";
 
-export interface IState {
+export const enum View {
+  list,
+  grid
+}
+
+export interface State {
   view: View;
 }
 
 export class App extends React.PureComponent {
-  public readonly state: IState = {
+  public readonly state: State = {
     view: View.list
   };
 
@@ -29,9 +34,4 @@ export class App extends React.PureComponent {
   private toggleStoryView = (view: View) => {
     this.setState({ view });
   };
-}
-
-export const enum View {
-  list,
-  grid
 }

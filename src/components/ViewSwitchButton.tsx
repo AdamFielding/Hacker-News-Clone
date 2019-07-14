@@ -2,12 +2,12 @@ import * as React from "react";
 import { Button, Container } from "semantic-ui-react";
 import { View } from "./App";
 
-interface IProps {
+interface Props {
   view: View;
   onClick: (view: View) => void | undefined;
 }
 
-const ViewSwitchButton = (props: IProps) => (
+const ViewSwitchButton = (props: Props) => (
   <Container text={true}>
     <Button.Group fluid={true}>
       <Button

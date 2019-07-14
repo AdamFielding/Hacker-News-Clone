@@ -6,14 +6,14 @@ export const enum CounterTypes {
   DECREMENT = "DECREMENT"
 }
 
-const initialCounterState: ICounterState = {
+const initialCounterState: CounterState = {
   counter: 0
 };
 
 const counterApp = (
-  state: ICounterState = initialCounterState,
+  state: CounterState = initialCounterState,
   { type }: CounterAction
-): ICounterState => {
+): CounterState => {
   switch (type) {
     case CounterTypes.INCREMENT:
       return { ...state, counter: state.counter + 1 };
@@ -28,20 +28,20 @@ export const incrementCount: ActionCreator<IncrementCounterAction> = () => ({
   type: CounterTypes.INCREMENT
 });
 
-export const decrementCount: ActionCreator<IDecrementCounterAction> = () => ({
+export const decrementCount: ActionCreator<DecrementCounterAction> = () => ({
   type: CounterTypes.DECREMENT
 });
 
-type CounterAction = IncrementCounterAction | IDecrementCounterAction;
+type CounterAction = IncrementCounterAction | DecrementCounterAction;
 
 interface IncrementCounterAction extends Action {
   type: CounterTypes.INCREMENT;
 }
 
-interface IDecrementCounterAction extends Action {
+interface DecrementCounterAction extends Action {
   type: CounterTypes.DECREMENT;
 }
 
-interface ICounterState {
+interface CounterState {
   readonly counter: number;
 }
