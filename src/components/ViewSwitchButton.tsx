@@ -7,20 +7,14 @@ interface Props {
   onClick: (view: View) => void | undefined;
 }
 
-const ViewSwitchButton = (props: Props) => (
+const ViewSwitchButton: React.FC<Props> = ({ view, onClick }): JSX.Element => (
   <Container text={true}>
     <Button.Group fluid={true}>
-      <Button
-        positive={props.view === View.list}
-        onClick={() => props.onClick(View.list)}
-      >
+      <Button positive={view === View.list} onClick={() => onClick(View.list)}>
         List
       </Button>
       <Button.Or />
-      <Button
-        positive={props.view === View.grid}
-        onClick={() => props.onClick(View.grid)}
-      >
+      <Button positive={view === View.grid} onClick={() => onClick(View.grid)}>
         Grid
       </Button>
     </Button.Group>

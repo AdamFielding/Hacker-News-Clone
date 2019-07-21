@@ -6,13 +6,11 @@ interface TitleProps {
   title: string;
 }
 
-export const Title: React.FunctionComponent<TitleProps> = (
-  props
-): JSX.Element => (
+export const Title: React.FC<TitleProps> = ({ title }): JSX.Element => (
   <>
     <Container text={true}>
       <Header as="h1" color="orange">
-        {props.title}
+        {title}
         <Header.Subheader>
           A worse version of your favourite website{" "}
           <a href={baseHackerNewsUrl}>(Let me fix that for you)</a>.

@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Container, Header } from "semantic-ui-react";
+import { Container } from "semantic-ui-react";
 import { Stories } from "./Stories";
 import { Title } from "./Title";
 import ViewSwitchButton from "./ViewSwitchButton";
@@ -18,7 +18,7 @@ export class App extends React.PureComponent {
     view: View.list
   };
 
-  public render() {
+  public render(): JSX.Element {
     return (
       <Container style={{ marginTop: "3em", marginBottom: "3em" }}>
         <Title title="Hacker News Clone" />

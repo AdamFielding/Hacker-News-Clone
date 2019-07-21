@@ -3,7 +3,6 @@ import {
   Button,
   Card,
   Container,
-  Grid,
   Header,
   List,
   Loader,
@@ -26,7 +25,7 @@ export class Stories extends React.PureComponent<Props> {
     this.refreshStories();
   }
 
-  public render() {
+  public render(): JSX.Element {
     const { view } = this.props;
     const { storiesData, error } = this.state;
     return (
@@ -73,15 +72,15 @@ export class Stories extends React.PureComponent<Props> {
     }
   };
 
-  private storyList(storiesData: Story[]) {
+  private storyList(storiesData: Story[]): (JSX.Element | null)[] {
     return storiesData.map(storyData => StoryListItem(storyData));
   }
 
-  private storyGrid(storiesData: Story[]) {
+  private storyGrid(storiesData: Story[]): (JSX.Element | null)[] {
     return storiesData.map(storyData => StoryCard(storyData));
   }
 
-  private getPlaceholder(numberOfLines: number) {
+  private getPlaceholder(numberOfLines: number): JSX.Element[] {
     return new Array(numberOfLines)
       .fill(1)
       .map((element, index) => <Placeholder.Line key={index} />);

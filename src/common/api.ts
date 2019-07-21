@@ -31,10 +31,10 @@ export const getStory = async (id: number): Promise<StoryResponse> => {
   return getCachedStory(id) || fetchStory(id);
 };
 
-export const getDomainFromUrl = (urlString: any): string => {
-  try {
+export const getDomainFromUrl = (urlString: unknown): string => {
+  if (typeof urlString === "string") {
     return new URL(urlString).hostname;
-  } catch {
+  } else {
     return "";
   }
 };
