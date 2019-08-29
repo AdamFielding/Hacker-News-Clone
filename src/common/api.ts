@@ -1,34 +1,38 @@
 const baseApiUrl = "https://hacker-news.firebaseio.com/v0/";
 export const baseHackerNewsUrl = "https://news.ycombinator.com/";
 
-const cachedStories: StoryResponse[] = [];
+const cachedStories: StoryRaw[] = [];
 
-const getCachedStory = (id: number): StoryResponse | undefined =>
-  cachedStories.find(story => story.id === id);
+const getCachedStory = (id: number): StoryResponse => {
+  const story = cachedStories.find(story => story.id === id);
+  return story
+    ? { success: true, data: story }
+    : { success: false, error: "story not found in cache" };
+};
 
 const fetchStory = async (id: number): Promise<StoryResponse> => {
+  // todo, move away from try catch, maybe find another library to replace fetch
+  // todo add timeouts
+  // todo add retries
   try {
     const storyResponse = await fetch(`${baseApiUrl}item/${id}.json`);
-    const story: StoryResponse = await storyResponse.json();
+    const story: StoryRaw = await storyResponse.json();
     cachedStories.push(story);
-    return story;
+    return { success: true, data: story };
   } catch (error) {
-    return error;
+    return { success: false, error };
   }
 };
 
-export function getHackerNewsUrl(id: number): string {
-  return `${baseHackerNewsUrl}item?id=${id}`;
-}
+export const getHackerNewsUrl = (id: number): string =>
+  `${baseHackerNewsUrl}item?id=${id}`;
 
-export const getTopStoryIds = async (): Promise<number[]> => {
-  const response = await fetch(`${baseApiUrl}topstories.json`);
-  const json = await response.json();
-  return json;
-};
+export const getTopStoryIds = async (): Promise<number[]> =>
+  (await fetch(`${baseApiUrl}topstories.json`)).json();
 
 export const getStory = async (id: number): Promise<StoryResponse> => {
-  return getCachedStory(id) || fetchStory(id);
+  const cachedStory = getCachedStory(id);
+  return cachedStory.success ? cachedStory : fetchStory(id);
 };
 
 export const getDomainFromUrl = (urlString: unknown): string => {
@@ -39,7 +43,11 @@ export const getDomainFromUrl = (urlString: unknown): string => {
   }
 };
 
-export interface StoryResponse {
+export const wasAllSuccess = <T>(
+  responses: Response<T>[]
+): responses is SuccessfulResponse<T>[] => responses.every(res => res.success);
+
+export interface StoryRaw {
   by: "string";
   descendants: number;
   id: number;
@@ -51,3 +59,16 @@ export interface StoryResponse {
   url?: string;
   text?: string;
 }
+
+type StoryResponse = Response<StoryRaw>;
+
+interface SuccessfulResponse<T> {
+  success: true;
+  data: T;
+}
+interface UnsuccessfulResponse<t> {
+  success: false;
+  error: string;
+}
+
+export type Response<T> = SuccessfulResponse<T> | UnsuccessfulResponse<T>;

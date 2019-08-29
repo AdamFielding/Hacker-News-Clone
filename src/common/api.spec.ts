@@ -7,8 +7,8 @@ describe("getDomainFromUrl", () => {
 
   it("should trim query strings", () => {
     expect(
-      api.getDomainFromUrl("https://another-test.com/what?query=true")
-    ).toBe("another-test.com");
+      api.getDomainFromUrl("https://www.another-test.com/what?query=true")
+    ).toBe("www.another-test.com");
   });
 
   it("should return an empty string if the url is not valid", () => {
