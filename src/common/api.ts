@@ -32,9 +32,9 @@ export const getStory = async (id: number): Promise<StoryResponse> => {
 };
 
 export const getDomainFromUrl = (urlString: unknown): string => {
-  if (typeof urlString === "string") {
-    return new URL(urlString).hostname;
-  } else {
+  try {
+    return typeof urlString === "string" ? new URL(urlString).hostname : "";
+  } catch (e) {
     return "";
   }
 };

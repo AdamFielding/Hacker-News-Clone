@@ -1,6 +1,6 @@
 module.exports = {
   parser: "@typescript-eslint/parser",
-  env: { browser: true, jest: true, es6: true },
+  env: { browser: true, jest: true, es6: true, node: true },
   extends: [
     "eslint:recommended",
     "plugin:react/recommended",
