@@ -2,8 +2,8 @@
 
 ## Prerequisites
 
-Node and npm
+Node and yarn
 
 ## Development
 
-To run locally `npm start`
+To run locally `yarn start`
