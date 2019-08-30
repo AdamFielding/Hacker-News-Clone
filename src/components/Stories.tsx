@@ -23,20 +23,20 @@ const getPlaceholder = (numberOfLines: number): JSX.Element[] =>
   new Array(numberOfLines).fill(1).map((el, i) => <Placeholder.Line key={i} />);
 
 export const Stories: React.FC<Props> = ({ view }: Props) => {
-  const [numberOfStories, updateNumberOfStories] = React.useState(10);
+  const [numberOfStories] = React.useState(10);
   const [storiesData, updateStoriesData] = React.useState();
   const [error, updateError] = React.useState();
 
-  React.useEffect(() => {
-    refreshStories();
-  }, [numberOfStories]);
-
-  const refreshStories = async (): Promise<void> => {
-    const storyData = await getStories(numberOfStories);
-    storyData.success
-      ? updateStoriesData(storyData.data)
-      : updateError(storiesData.error);
+  const refreshStories = async (numberOfStories: number): Promise<void> => {
+    const storyDataRes = await getStories(numberOfStories);
+    storyDataRes.success
+      ? updateStoriesData(storyDataRes.data)
+      : updateError(storyDataRes.error);
   };
+
+  React.useEffect(() => {
+    refreshStories(numberOfStories);
+  }, [numberOfStories]);
 
   return (
     <Container text={view === View.list}>
@@ -45,7 +45,12 @@ export const Stories: React.FC<Props> = ({ view }: Props) => {
         color="grey"
         textAlign={view === View.grid ? "center" : "left"}
         content="Stories"
-        subheader={<Button onClick={refreshStories} content="refresh" />}
+        subheader={
+          <Button
+            onClick={() => refreshStories(numberOfStories)}
+            content="refresh"
+          />
+        }
       />
       {storiesData && view === View.list && (
         <List
