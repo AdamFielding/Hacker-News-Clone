@@ -16,7 +16,7 @@ export const getStories = async (
   const stories = await Promise.all(ids.map(async id => await getStory(id)));
 
   if (!wasAllSuccess(stories)) {
-    return { success: false, error: "failed getting a story" };
+    return { success: false, error: new Error("failed getting a story") };
   } else {
     return {
       success: true,

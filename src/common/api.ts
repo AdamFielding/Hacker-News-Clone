@@ -7,7 +7,7 @@ const getCachedStory = (id: number): StoryResponse => {
   const story = cachedStories.find(story => story.id === id);
   return story
     ? { success: true, data: story }
-    : { success: false, error: "story not found in cache" };
+    : { success: false, error: new Error("story not found in cache") };
 };
 
 const fetchStory = async (id: number): Promise<StoryResponse> => {
@@ -68,7 +68,7 @@ interface SuccessfulResponse<T> {
 }
 interface UnsuccessfulResponse<t> {
   success: false;
-  error: string;
+  error: Error;
 }
 
 export type Response<T> = SuccessfulResponse<T> | UnsuccessfulResponse<T>;
